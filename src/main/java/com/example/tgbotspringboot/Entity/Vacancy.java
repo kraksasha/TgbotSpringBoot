@@ -3,6 +3,15 @@ package com.example.tgbotspringboot.Entity;
 public class Vacancy {
     private String id;
     private String name;
+    private Counters counters;
+
+    public Counters getCounters() {
+        return counters;
+    }
+
+    public void setCounters(Counters counters) {
+        this.counters = counters;
+    }
 
     public String getId() {
         return id;

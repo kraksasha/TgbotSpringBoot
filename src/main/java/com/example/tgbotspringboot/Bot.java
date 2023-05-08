@@ -31,7 +31,7 @@ public class Bot {
                     List<Vacancy> list = hhApi.getVacanciesFilterNameRegion(massive[0],massive[1]);
                     if (list.size() != 0){
                         list.forEach(vacancy -> {
-                            bot.execute(new SendMessage(it.message().chat().id(), "Вакансия: " + vacancy.getName() + "\nСсылка: http://hh.ru/vacancy/" + vacancy.getId()));
+                            bot.execute(new SendMessage(it.message().chat().id(), "Вакансия: " + vacancy.getName() + "\nКоличество откликов: " + vacancy.getCounters().getResponses() + "\nСсылка: http://hh.ru/vacancy/" + vacancy.getId()));
                             System.out.println(vacancy.getId() + " " + vacancy.getName());
                         });
                     } else {

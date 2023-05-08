@@ -25,7 +25,7 @@ public class HhApi {
     }
 
     public List<Vacancy> getVacanciesFilterNameRegion(String nameVacancy, String nameRegion){
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/vacancies?" + "text=" + nameVacancy + "&area=" + getIdRegion(nameRegion))).build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/vacancies?" + "text=" + nameVacancy + "&area=" + getIdRegion(nameRegion) + "&responses_count_enabled=true")).build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             String body = response.body();

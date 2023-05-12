@@ -39,6 +39,50 @@ public class HhApi {
         }
     }
 
+    public List<Vacancy> getVacanciesFilterNameRegionExperience(String nameVacancy, String nameRegion, String idExperience){
+        HttpRequest httpRequestNre = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/vacancies?" + "text=" + nameVacancy + "&area=" + getIdRegion(nameRegion) + "&experience=" + idExperience  + "&responses_count_enabled=true")).build();
+        try {
+            HttpResponse<String> responseNre = httpClient.send(httpRequestNre, HttpResponse.BodyHandlers.ofString());
+            String bodyNre = responseNre.body();
+            System.out.println(bodyNre);
+            ListVacancies lV = objectMapper.readValue(bodyNre,ListVacancies.class);
+            return lV.getItems();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Vacancy> getVacanciesFilterNameRegionSalary(String nameVacancy, String nameRegion, String salary){
+        HttpRequest httpRequestNrs = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/vacancies?" + "text=" + nameVacancy + "&area=" + getIdRegion(nameRegion) + "&salary=" + salary  + "&responses_count_enabled=true")).build();
+        try {
+            HttpResponse<String> responseNrs = httpClient.send(httpRequestNrs, HttpResponse.BodyHandlers.ofString());
+            String bodyNrs = responseNrs.body();
+            System.out.println(bodyNrs);
+            ListVacancies lV = objectMapper.readValue(bodyNrs,ListVacancies.class);
+            return lV.getItems();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Vacancy> getVacanciesFilterNameRegionExperienceSalary(String nameVacancy, String nameRegion, String idExperience, String salary){
+        HttpRequest httpRequestNres = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/vacancies?" + "text=" + nameVacancy + "&area=" + getIdRegion(nameRegion) + "&experience=" + idExperience + "&salary=" + salary   + "&responses_count_enabled=true")).build();
+        try {
+            HttpResponse<String> responseNres = httpClient.send(httpRequestNres, HttpResponse.BodyHandlers.ofString());
+            String bodyNres = responseNres.body();
+            System.out.println(bodyNres);
+            ListVacancies lV = objectMapper.readValue(bodyNres,ListVacancies.class);
+            return lV.getItems();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public String getIdRegion(String nameRegion){
         HttpRequest httpRequestArea = HttpRequest.newBuilder().uri(URI.create("https://api.hh.ru/areas/113")).build();
         String idAreas = null;
@@ -67,11 +111,11 @@ public class HhApi {
             if (idAreas == null){
                 idAreas = "2";
             }
-            return idAreas;
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        return idAreas;
     }
 }

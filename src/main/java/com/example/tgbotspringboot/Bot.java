@@ -69,7 +69,7 @@ public class Bot {
         if (Double.parseDouble(massiveNameExperience[0]) >= 1 && Double.parseDouble(massiveNameExperience[0]) < 3){
             return massive[1];
         }
-        if (Double.parseDouble(massiveNameExperience[0]) > 3 && Double.parseDouble(massiveNameExperience[0]) < 6){
+        if (Double.parseDouble(massiveNameExperience[0]) >= 3 && Double.parseDouble(massiveNameExperience[0]) < 6){
             return massive[2];
         }
         if (Double.parseDouble(massiveNameExperience[0]) >= 6){
@@ -78,7 +78,7 @@ public class Bot {
         return massive[1];
     }
 
-    public int experienceOrSalary(String secondElementMassive){
+    public double experienceOrSalary(String secondElementMassive){
         String secondElementMassiveSplit[] = secondElementMassive.split(" ");
         char s[] = secondElementMassiveSplit[0].toCharArray();
         for (int i = 0; i < s.length; i++){
@@ -87,6 +87,6 @@ public class Bot {
             }
         }
         secondElementMassiveSplit[0] = String.valueOf(s);
-        return Integer.parseInt(secondElementMassiveSplit[0]);
+        return Double.parseDouble(secondElementMassiveSplit[0]);
     }
 }

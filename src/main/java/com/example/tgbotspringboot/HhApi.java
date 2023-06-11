@@ -5,7 +5,6 @@ import com.example.tgbotspringboot.Entity.ListVacancies;
 import com.example.tgbotspringboot.Entity.Vacancy;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -1,14 +1,11 @@
 package com.example.tgbotspringboot.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Counters {
 
     private int responses;
-
-    public int getResponses() {
-        return responses;
-    }
-
-    public void setResponses(int responses) {
-        this.responses = responses;
-    }
 }

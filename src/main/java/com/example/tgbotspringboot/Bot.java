@@ -7,7 +7,6 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -30,16 +29,16 @@ public class Bot {
                             "\nВведи название вакансии, город поиска, опыт работы, заработная плата. Каждый пункт запроса отправляем в чат. Что бы начать поиск отправь в чат слово -Найти-:" + "\nЕсли город поиска не уникальный введи в формате:" +
                             "\nГород (Область)" + "\nВ опыте пишем количество лет (1.5 года или 6 лет)"));
                 } else {
-                    if (!it.message().text().equals("Найти")){
+                    if (!it.message().text().equalsIgnoreCase("Найти")){
                         listArray.add(it.message().text());
                         System.out.println(it.message().text());
                     } else {
                         filter = getFilterResponse(listArray);
+                        listArray = new ArrayList<>();
                         if (filter == null){
                             list = new ArrayList<>();
                         } else {
                             list = logic.getVacancyFilter(filter);
-                            listArray = new ArrayList<>();
                         }
                         if (list.size() != 0){
                             list.forEach(vacancy -> {

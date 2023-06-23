@@ -18,26 +18,19 @@ public class Logic {
     }
 
     public List<Vacancy> getVacancyFilter(Filter filter){
-        Field field[] = filter.getClass().getDeclaredFields();
-        field[2].setAccessible(true);
-        field[3].setAccessible(true);
-        try {
-            if (field[2].get(filter) == null && Integer.parseInt(String.valueOf(field[3].get(filter))) == 0){
-                return hhApi.getVacanciesFilterNameRegion(filter.getNameVacancy(),filter.getNameRegion());
-            }
-            if (field[2].get(filter) != null && Integer.parseInt(String.valueOf(field[3].get(filter))) == 0){
-                return hhApi.getVacanciesFilterNameRegionExperience(filter.getNameVacancy(),filter.getNameRegion(), overRideExperience(filter.getExperience()));
-            }
-            if (field[2].get(filter) == null && Integer.parseInt(String.valueOf(field[3].get(filter))) != 0){
-                return hhApi.getVacanciesFilterNameRegionSalary(filter.getNameVacancy(),filter.getNameRegion(),String.valueOf(filter.getSalary()));
-            }
-            if (field[2].get(filter) != null && Integer.parseInt(String.valueOf(field[3].get(filter))) != 0){
-                return hhApi.getVacanciesFilterNameRegionExperienceSalary(filter.getNameVacancy(), filter.getNameRegion(), overRideExperience(filter.getExperience()), String.valueOf(filter.getSalary()));
-            }
-            return null;
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        if (filter.getExperience() == null && filter.getSalary() == 0){
+            return hhApi.getVacanciesFilterNameRegion(filter.getNameVacancy(),filter.getNameRegion());
         }
+        if (filter.getExperience() != null && filter.getSalary() == 0){
+            return hhApi.getVacanciesFilterNameRegionExperience(filter.getNameVacancy(),filter.getNameRegion(), overRideExperience(filter.getExperience()));
+        }
+        if (filter.getExperience() == null && filter.getSalary() != 0){
+            return hhApi.getVacanciesFilterNameRegionSalary(filter.getNameVacancy(),filter.getNameRegion(),String.valueOf(filter.getSalary()));
+        }
+        if (filter.getExperience() != null && filter.getSalary() != 0){
+            return hhApi.getVacanciesFilterNameRegionExperienceSalary(filter.getNameVacancy(), filter.getNameRegion(), overRideExperience(filter.getExperience()), String.valueOf(filter.getSalary()));
+        }
+        return null;
     }
 
     public String overRideExperience(String nameExperience){

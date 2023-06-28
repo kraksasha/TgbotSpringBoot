@@ -5,7 +5,6 @@ import com.example.tgbotspringboot.Entity.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 @Component
@@ -34,6 +33,7 @@ public class Logic {
     }
 
     public String overRideExperience(String nameExperience){
+        double exper;
         String massive[] = {"noExperience","between1And3","between3And6","moreThan6"};
         String massiveNameExperience[] = nameExperience.split(" ");
         char s[] = massiveNameExperience[0].toCharArray();
@@ -43,16 +43,17 @@ public class Logic {
             }
         }
         massiveNameExperience[0] = String.valueOf(s);
-        if (Double.parseDouble(massiveNameExperience[0]) < 1){
+        exper = Double.parseDouble(massiveNameExperience[0]);
+        if (exper < 1){
             return massive[0];
         }
-        if (Double.parseDouble(massiveNameExperience[0]) >= 1 && Double.parseDouble(massiveNameExperience[0]) < 3){
+        if (exper >= 1 && exper < 3){
             return massive[1];
         }
-        if (Double.parseDouble(massiveNameExperience[0]) >= 3 && Double.parseDouble(massiveNameExperience[0]) <= 6){
+        if (exper >= 3 && exper <= 6){
             return massive[2];
         }
-        if (Double.parseDouble(massiveNameExperience[0]) > 6){
+        if (exper > 6){
             return massive[3];
         }
         return null;

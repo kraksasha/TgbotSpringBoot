@@ -1,4 +1,4 @@
-package com.example.tgbotspringboot.config;
+package com.example.tgbotspringboot.Config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +11,7 @@ public class WebConfig {
     final int size = 16 * 1024 * 1024;
 
     @Bean
-    public WebClient createWebClient(){
+    public WebClient webClientCreate(){
         return WebClient.builder().baseUrl("https://api.hh.ru")
                 .exchangeStrategies(ExchangeStrategies.builder()
                         .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(size))
@@ -19,7 +19,7 @@ public class WebConfig {
     }
 
     @Bean
-    public ObjectMapper createObjectMapper(){
+    public ObjectMapper objectMapperCreate(){
         return new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 }

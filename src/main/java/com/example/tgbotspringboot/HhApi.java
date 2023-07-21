@@ -3,10 +3,9 @@ package com.example.tgbotspringboot;
 import com.example.tgbotspringboot.Entity.Country;
 import com.example.tgbotspringboot.Entity.ListVacancies;
 import com.example.tgbotspringboot.Entity.Vacancy;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.io.IOException;
 import java.util.List;
@@ -14,15 +13,10 @@ import java.util.List;
 public class HhApi {
     private ObjectMapper objectMapper;
     private WebClient webClient;
-    final int size = 16 * 1024 * 1024;
-
-    public HhApi(){
-        objectMapper = new ObjectMapper();
-        webClient = WebClient.builder().baseUrl("https://api.hh.ru")
-                .exchangeStrategies(ExchangeStrategies.builder()
-                        .codecs(codecs -> codecs.defaultCodecs().maxInMemorySize(size))
-                        .build()).build();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    @Autowired
+    public HhApi(WebClient webClient, ObjectMapper objectMapper){
+        this.webClient = webClient;
+        this.objectMapper = objectMapper;
     }
 
     public List<Vacancy> getVacanciesFilterNameRegion(String nameVacancy, String nameRegion){
